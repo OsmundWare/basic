@@ -47,6 +47,38 @@ class SiteController extends Controller
         ];
     }
 
+    public function actionSaluda($get ="Tutorial yii2")
+    {
+        $numeros = [1,2,3,4,5];
+        $mensaje = "Este mensaje fue pasado desde el controlador a la vista";
+        return $this->render("saluda",["frase"=>$mensaje,
+                                        "digitos" =>$numeros,
+                                            "get" => $get]);
+    }
+
+    public function actionFormulario($mensaje = null)
+    {
+        return $this->render("formulario",["mensaje"=>$mensaje]);
+    }
+
+    public function actionRequest()
+    {
+        $mensaje = null;
+
+        if(isset($_REQUEST["nombre"]))
+        {
+            $mensaje = "Bien haz enviado tu nombre correctamente: ".$_REQUEST["nombre"];
+
+        }
+        $this->redirect(["site/formulario","mensaje"=>$mensaje]);
+
+    }
+
+    public function actionValidarformulario()
+    {
+        return $this->render("validarformulario");
+    }
+
     public function actionIndex()
     {
         return $this->render('index');
